@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,8 +17,9 @@ public class GameService {
     private final GameRepository gameRepository;
 
     @Transactional(readOnly = true)
-    public List<Game> getAllGames(){
+    public List<GameMinDto> getAllGames(){
         List<Game> result = gameRepository.findAll();
-        return result;
+        List<GameMinDto> dto = result.stream().map(x -> new GameMinDto(x)).toList();
+        return dto;
     }
 }
