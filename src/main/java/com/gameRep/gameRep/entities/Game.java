@@ -1,4 +1,4 @@
-package com.gameRep.gameRep.Entities;
+package com.gameRep.gameRep.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
