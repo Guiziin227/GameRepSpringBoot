@@ -1,5 +1,6 @@
 package com.gameRep.gameRep.controller;
 
+import com.gameRep.gameRep.dto.GameMinDto;
 import com.gameRep.gameRep.entities.Game;
 import com.gameRep.gameRep.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,8 @@ public class GameController {
 
 
     @GetMapping
-    List<Game> findAll() {
-        List<Game> result = gameService.getAllGames();
+    List<GameMinDto> findAll() {
+        List<GameMinDto> result = gameService.getAllGames();
         return result;
     }
 
