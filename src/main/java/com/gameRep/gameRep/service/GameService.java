@@ -3,6 +3,7 @@ package com.gameRep.gameRep.service;
 import com.gameRep.gameRep.dto.GameDto;
 import com.gameRep.gameRep.dto.GameMinDto;
 import com.gameRep.gameRep.entities.Game;
+import com.gameRep.gameRep.projections.GameMinProjection;
 import com.gameRep.gameRep.repository.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,19 +19,26 @@ public class GameService {
     private final GameRepository gameRepository;
 
     @Transactional(readOnly = true)
-    public List<GameMinDto> getAllGames(){
+    public List<GameMinDto> getAllGames() {
         List<Game> result = gameRepository.findAll();
         List<GameMinDto> dto = result.stream().map(x -> new GameMinDto(x)).toList();
         return dto;
     }
 
     @Transactional(readOnly = true)
-    public GameDto getGameById(Long id){
+    public GameDto getGameById(Long id) {
         Game result = gameRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("Game not found with id: " + id)
         );
 
         GameDto dto = new GameDto(result);
+        return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDto> findByList(Long listId) {
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
+        List<GameMinDto> dto = result.stream().map(x -> new GameMinDto(x)).collect(Collectors.toList());
         return dto;
     }
 }
