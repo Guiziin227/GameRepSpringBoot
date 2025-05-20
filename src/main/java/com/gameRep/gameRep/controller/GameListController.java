@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/gameLists")
+@RequestMapping(value = "/lists")
 public class GameListController {
 
     private final GameListService gameListService;
