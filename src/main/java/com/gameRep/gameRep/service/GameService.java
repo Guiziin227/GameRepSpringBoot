@@ -1,5 +1,6 @@
 package com.gameRep.gameRep.service;
 
+import com.gameRep.gameRep.dto.GameDto;
 import com.gameRep.gameRep.dto.GameMinDto;
 import com.gameRep.gameRep.entities.Game;
 import com.gameRep.gameRep.repository.GameRepository;
@@ -24,10 +25,12 @@ public class GameService {
     }
 
     @Transactional(readOnly = true)
-    public Game getGameById(Long id){
+    public GameDto getGameById(Long id){
         Game result = gameRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("Game not found with id: " + id)
         );
-        return result;
+
+        GameDto dto = new GameDto(result);
+        return dto;
     }
 }

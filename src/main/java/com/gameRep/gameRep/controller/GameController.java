@@ -1,5 +1,6 @@
 package com.gameRep.gameRep.controller;
 
+import com.gameRep.gameRep.dto.GameDto;
 import com.gameRep.gameRep.dto.GameMinDto;
 import com.gameRep.gameRep.entities.Game;
 import com.gameRep.gameRep.service.GameService;
@@ -27,8 +28,8 @@ public class GameController {
     }
 
     @GetMapping(value = "/{id}")
-    Game findById(@PathVariable Long id) {
-        Game result = gameService.getGameById(id);
+    GameDto findById(@PathVariable Long id) {
+        GameDto result = gameService.getGameById(id);
         return result;
     }
 
