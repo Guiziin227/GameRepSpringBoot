@@ -22,4 +22,12 @@ public class GameService {
         List<GameMinDto> dto = result.stream().map(x -> new GameMinDto(x)).toList();
         return dto;
     }
+
+    @Transactional(readOnly = true)
+    public Game getGameById(Long id){
+        Game result = gameRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Game not found with id: " + id)
+        );
+        return result;
+    }
 }
